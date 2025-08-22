@@ -1,0 +1,31 @@
+{
+    "name": "milos/mailer-sdk",
+    "autoload": {
+        "psr-4": {
+            "Milos\\MailerSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Milos Popovic",
+            "email": "milos.pop.004@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/http-factory": "^1.1",
+        "psr/http-client": "^1.0",
+        "nyholm/psr7": "^1.8"
+    },
+  "suggest": {
+        "symfony/http-client": "^7.3"
+  },
+  "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "require-dev": {
+        "symfony/http-client": "^7.3",
+        "phpunit/phpunit": "^12.3"
+    }
+}
