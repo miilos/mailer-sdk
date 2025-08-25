@@ -1,5 +1,5 @@
 {
-    "name": "milos/mailer-sdk",
+    "name": "milosp/mailer-sdk",
     "description": "SDK for the mailer service",
     "autoload": {
         "psr-4": {
@@ -18,10 +18,10 @@
         "nyholm/psr7": "^1.8",
         "php-amqplib/php-amqplib": "^3.7"
     },
-  "suggest": {
-        "symfony/http-client": "^7.3"
-  },
-  "config": {
+    "suggest": {
+          "symfony/http-client": "^7.3"
+    },
+    "config": {
         "allow-plugins": {
             "php-http/discovery": true
         }
