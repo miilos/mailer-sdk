@@ -2,28 +2,36 @@
 
 namespace Milos\MailerSdk;
 
-use Milos\MailerSdk\Core\ClientBuilder;
+use Milos\MailerSdk\Core\AmqpClient;
+use Milos\MailerSdk\Core\ApiClient;
 use Milos\MailerSdk\Resources\Email;
 
 class Mailer
 {
-    private ClientBuilder $clientBuilder;
+    private ApiClient $apiClient;
     private string $baseUri;
+    private ?AmqpClient $amqpClient;
 
     public function __construct(array $options = [])
     {
-        $this->clientBuilder = $options['client_builder'] ?? new ClientBuilder();
+        $this->apiClient = $options['api_client'] ?? new ApiClient();
         $this->baseUri = $options['base_uri'] ?? 'http://localhost:8000/api';
+        $this->amqpClient = $options['amqp_client'] ?? null;
     }
 
-    public function getClientBuilder(): ClientBuilder
+    public function getApiClient(): ApiClient
     {
-        return $this->clientBuilder;
+        return $this->apiClient;
     }
 
     public function getBaseUri(): string
     {
         return $this->baseUri;
+    }
+
+    public function getAmqpClient(): ?AmqpClient
+    {
+        return $this->amqpClient;
     }
 
     public function emails(): Email

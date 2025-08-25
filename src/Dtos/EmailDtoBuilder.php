@@ -2,6 +2,8 @@
 
 namespace Milos\MailerSdk\Dtos;
 
+use Milos\MailerSdk\Exception\MailerException;
+
 class EmailDtoBuilder
 {
     private EmailDto $email;
@@ -76,6 +78,23 @@ class EmailDtoBuilder
 
     public function getEmail(): EmailDto
     {
+        $this->validateEmail();
+
         return $this->email;
+    }
+
+    private function validateEmail(): void
+    {
+        if (!$this->email->getSubject()) {
+            throw new MailerException('Email subject cannot be empty!');
+        }
+
+        if (!$this->email->getFrom()) {
+            throw new MailerException('Email from address cannot be empty!');
+        }
+
+        if (!$this->email->getTo()) {
+            throw new MailerException('Email must be addressed to at least one recipient!');
+        }
     }
 }

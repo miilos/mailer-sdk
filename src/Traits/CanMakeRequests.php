@@ -9,7 +9,7 @@ trait CanMakeRequests
 {
     public function post(Mailer $sdk, string $endpoint, array $data): ResponseInterface
     {
-        $client = $sdk->getClientBuilder();
+        $client = $sdk->getApiClient();
         $baseUri = $sdk->getBaseUri();
 
         $url = $baseUri . '/' . ltrim($endpoint, '/');

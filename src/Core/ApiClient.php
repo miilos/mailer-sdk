@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Symfony\Component\HttpClient\Psr18Client;
 
-class ClientBuilder
+class ApiClient
 {
     private ClientInterface $httpClient;
     private RequestFactoryInterface $requestFactory;
