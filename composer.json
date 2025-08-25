@@ -1,5 +1,6 @@
 {
     "name": "milos/mailer-sdk",
+    "description": "SDK for the mailer service",
     "autoload": {
         "psr-4": {
             "Milos\\MailerSdk\\": "src/"
