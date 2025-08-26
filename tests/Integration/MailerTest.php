@@ -11,7 +11,9 @@ class MailerTest extends TestCase
 {
     public function testSendEmails(): void
     {
-        $mailer = new Mailer();
+        $mailer = new Mailer([
+            'base_uri' => 'http://localhost:8000',
+        ]);
 
         $email = (new EmailDtoBuilder())
             ->subject('sdk api')
@@ -28,7 +30,7 @@ class MailerTest extends TestCase
         $this->assertSame(200, $res->getStatusCode());
     }
 
-    public function testDispatchesMessagesToQueue(): void
+    public function testDispatchesMessagesWithClientDefaults(): void
     {
         $amqpClient = new AMQPClient(
             host: 'localhost',
@@ -39,7 +41,8 @@ class MailerTest extends TestCase
         );
 
         $mailer = new Mailer([
-            'amqp_client' => $amqpClient,
+            'base_uri' => 'http://localhost:8000',
+            'amqp_client' => $amqpClient
         ]);
 
         $email = (new EmailDtoBuilder())
@@ -53,5 +56,32 @@ class MailerTest extends TestCase
             ->getEmail();
 
         $mailer->emails()->sendAsMessage($email);
+    }
+
+    public function testDispatchesMessagesWithMethodParams(): void
+    {
+        $amqpClient = new AMQPClient(
+            host: 'localhost',
+            port: 5674,
+            user: 'guest',
+            password: 'guest',
+        );
+
+        $mailer = new Mailer([
+            'base_uri' => 'http://localhost:8000',
+            'amqp_client' => $amqpClient
+        ]);
+
+        $email = (new EmailDtoBuilder())
+            ->subject('sdk amqp function')
+            ->from('milos@gmail.com')
+            ->to(['testAddr@gmail.com'])
+            ->body('hi from the sdk {{ var }}')
+            ->variables([
+                'var' => 'variable'
+            ])
+            ->getEmail();
+
+        $mailer->emails()->sendAsMessage($email, 'sdk_messages');
     }
 }

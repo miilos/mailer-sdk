@@ -14,13 +14,14 @@ class ApiClient
     private RequestFactoryInterface $requestFactory;
     private StreamFactoryInterface $streamFactory;
 
+    // the client class uses the symfony http client by default, if no other client and factories were passed in
     public function __construct(
         ?ClientInterface         $httpClient = null,
         ?RequestFactoryInterface $requestFactory = null,
         ?StreamFactoryInterface  $streamFactory = null
     )
     {
-        if (!class_exists(Psr18Client::class)) {
+        if (!$httpClient && !$requestFactory && !$streamFactory && !class_exists(Psr18Client::class)) {
             throw new \RuntimeException('Symfony HTTP client not found! Please run composer require symfony/http-client.');
         }
 

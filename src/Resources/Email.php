@@ -24,8 +24,8 @@ class Email
         return $this->post($this->sdk, '/send', $reqBody);
     }
 
-    public function sendAsMessage(EmailDto $email): void
+    public function sendAsMessage(EmailDto $email, ?string $exchange = null, ?string $routingKey = null): void
     {
-        $this->dispatch($this->sdk, $email->toArray());
+        $this->dispatch($this->sdk, $email->toArray(), $exchange, $routingKey);
     }
 }

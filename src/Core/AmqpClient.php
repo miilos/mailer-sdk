@@ -9,16 +9,16 @@ class AmqpClient
 {
     private AMQPStreamConnection $connection;
     private AMQPChannel $channel;
-    private string $exchange;
-    private string $routingKey;
+    private ?string $exchange;
+    private ?string $routingKey;
 
     public function __construct(
         string $host,
         string $port,
         string $user,
         string $password,
-        string $exchange,
-        string $routingKey = ''
+        ?string $exchange = null,
+        ?string $routingKey = null
     )
     {
         $this->connection = new AMQPStreamConnection($host, $port, $user, $password);
@@ -39,12 +39,12 @@ class AmqpClient
         return $this->channel;
     }
 
-    public function getExchange(): string
+    public function getExchange(): ?string
     {
         return $this->exchange;
     }
 
-    public function getRoutingKey(): string
+    public function getRoutingKey(): ?string
     {
         return $this->routingKey;
     }
