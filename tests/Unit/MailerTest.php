@@ -3,7 +3,7 @@
 use Milos\MailerSdk\Core\AmqpClient;
 use Milos\MailerSdk\Core\ApiClient;
 use Milos\MailerSdk\Dtos\EmailDto;
-use Milos\MailerSdk\Dtos\EmailDtoBuilder;
+use Milos\MailerSdk\Dtos\EmailBuilder;
 use Milos\MailerSdk\Exception\MailerException;
 use Milos\MailerSdk\Mailer;
 use Milos\MailerSdk\Resources\Email;

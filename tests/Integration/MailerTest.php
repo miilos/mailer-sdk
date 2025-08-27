@@ -3,7 +3,7 @@
 namespace Integration;
 
 use Milos\MailerSdk\Core\AmqpClient;
-use Milos\MailerSdk\Dtos\EmailDtoBuilder;
+use Milos\MailerSdk\Dtos\EmailBuilder;
 use Milos\MailerSdk\Mailer;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class MailerTest extends TestCase
             'base_uri' => 'http://localhost:8000',
         ]);
 
-        $email = (new EmailDtoBuilder())
+        $email = (new EmailBuilder())
             ->subject('sdk api')
             ->from('milos@gmail.com')
             ->to(['testAddr@gmail.com'])
@@ -45,7 +45,7 @@ class MailerTest extends TestCase
             'amqp_client' => $amqpClient
         ]);
 
-        $email = (new EmailDtoBuilder())
+        $email = (new EmailBuilder())
             ->subject('sdk amqp')
             ->from('milos@gmail.com')
             ->to(['testAddr@gmail.com'])
@@ -72,7 +72,7 @@ class MailerTest extends TestCase
             'amqp_client' => $amqpClient
         ]);
 
-        $email = (new EmailDtoBuilder())
+        $email = (new EmailBuilder())
             ->subject('sdk amqp function')
             ->from('milos@gmail.com')
             ->to(['testAddr@gmail.com'])

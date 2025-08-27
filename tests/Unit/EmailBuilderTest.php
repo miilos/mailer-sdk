@@ -1,15 +1,15 @@
 <?php
 
 use Milos\MailerSdk\Dtos\EmailDto;
-use Milos\MailerSdk\Dtos\EmailDtoBuilder;
+use Milos\MailerSdk\Dtos\EmailBuilder;
 use Milos\MailerSdk\Exception\MailerException;
 use PHPUnit\Framework\TestCase;
 
-class EmailDtoBuilderTest extends TestCase
+class EmailBuilderTest extends TestCase
 {
     public function testBuildsEmailDtoObject(): void
     {
-        $emailDto = (new EmailDtoBuilder())
+        $emailDto = (new EmailBuilder())
             ->subject('test')
             ->from('milos@gmail.com')
             ->to(['test@gmail.com'])
@@ -22,10 +22,10 @@ class EmailDtoBuilderTest extends TestCase
     public function testThrowsExceptionOnInvalidEmail(): void
     {
         $this->expectException(MailerException::class);
-        $emailDto = (new EmailDtoBuilder())
+        $emailDto = (new EmailBuilder())
             ->subject('test')
-            ->to(['test@gmail.com'])
-            ->body('test body')
+            ->from('milos@gmail.com')
+            ->bodyTemplate('test email template')
             ->getEmail();
     }
 }
